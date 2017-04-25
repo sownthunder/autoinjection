@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
@@ -561,3 +562,6 @@ Formats:
     </boundary>
     <!-- End of AGAINST boolean full-text search boundaries -->
 </root>
+=======
+
+>>>>>>> origin/master

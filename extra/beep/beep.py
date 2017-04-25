@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/usr/bin/env python
 
 """
@@ -94,3 +95,6 @@ def _linux_wav_play(filename):
 
 if __name__ == "__main__":
     beep()
+=======
+
+>>>>>>> origin/master

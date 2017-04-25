@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/usr/bin/env python
 #
 #  icmpsh - simple icmp command shell (port of icmpsh-m.pl written in
@@ -20,3 +21,6 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 pass
+=======
+
+>>>>>>> origin/master

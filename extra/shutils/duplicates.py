@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/usr/bin/env python
 
 # Copyright (c) 2006-2017 sqlmap developers (http://sqlmap.org/)
@@ -25,3 +26,6 @@ if len(sys.argv) > 0:
 
     with open(sys.argv[1], 'w+') as f:
         f.writelines("\n".join(items))
+=======
+
+>>>>>>> origin/master

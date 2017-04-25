@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/usr/bin/env python
 
 import logging
@@ -32,3 +33,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+=======
+
+>>>>>>> origin/master
