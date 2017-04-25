@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #!/usr/bin/env python
 
 """
@@ -136,6 +135,3 @@ def updateMSSQLXML():
 
 if __name__ == "__main__":
     updateMSSQLXML()
-=======
-
->>>>>>> origin/master

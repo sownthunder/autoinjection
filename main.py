@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import requests
 import re
 import urlparse
@@ -264,6 +263,3 @@ def main():
 			print "[!]please create task first!"
 if __name__=="__main__":
     main()
-=======
-
->>>>>>> origin/master

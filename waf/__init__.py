@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 #!/usr/bin/env python
 
 """
@@ -7,6 +7,3 @@ See the file 'doc/COPYING' for copying permission
 """
 
 pass
-=======
-
->>>>>>> origin/master
