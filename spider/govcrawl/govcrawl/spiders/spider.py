@@ -6,12 +6,11 @@ import urlparse
 class GovSpider(scrapy.Spider):
 	name = "govspider"
 	download_delay = 1
-	allowed_domains = ['192.168.0.102']
-	def __init__(self,target = None):
-		self.com = urlparse.urlparse(target)
-		self.start_urls = ['%s' % (target)]
-		#self.allowed_domains = ["%s" % (self.com.netloc)]
-		super(GovSpider,self).__init__()
+	#allowed_domains = ['192.168.0.102']
+	f = open("website.txt","r")
+	websites = f.readlines()
+	start_urls = ['%s' % (target.rstrip()) for target in websites]
+	allowed_domains = ["%s" % (urlparse.urlparse(target.rstrip()).netloc) for target in websites]
 
 	def parse(self,response):
 		sel = scrapy.Selector(response)
@@ -20,6 +19,8 @@ class GovSpider(scrapy.Spider):
 		for info in article_info:
 			item = GovcrawlItem()
 			link = info.xpath('@href').extract()
+			if not link:
+				continue
 			position = link[0].find("/")
 			if position < 0 or "?" not in link[0]:
 				continue

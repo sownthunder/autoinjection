@@ -15,27 +15,26 @@ class CustomFilter(RFPDupeFilter):
 		mm = url.split("&catid")[0]
 		return mm
 
-	def __getc(self,url):
-		mm = url.split("&c")[0]
+	def __getnews_id(self,url):
+		mm = url.split("&news_id")[0]
 		return mm
 
-	def __getm(self,url):
-		mm = url.split("&m")[0]
+	def __gettownName(self,url):
+		mm = url.split("&townName")[0]
 		return mm
 
 	def request_seen(self,request):
 		fp = self.__getid(request.url)
 		catid = self.__getcatid(request.url)
-		c = self.__getc(request.url)
-		#m = self.__getm(request.url)
+		news_id = self.__getc(request.url)
+		townName = self.__getm(request.url)
 		if fp in self.fingerprints \
 		or catid in self.fingerprints \
-		or c in self.fingerprints \
+		or news_id in self.fingerprints \
+		or townName in self.fingerprints \
 		:
 			return True
 		self.fingerprints.add(fp)
 		self.fingerprints.add(catid)
-		self.fingerprints.add(c)
-		#self.fingerprints.add(m)
-		if self.file:
-			self.file.write(request.url + os.linesep)
+		self.fingerprints.add(news_id)
+		self.fingerprints.add(townName)
