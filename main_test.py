@@ -13,7 +13,7 @@ staUrl = ''
 dataUrl = ''
 baseUrl = 'http://127.0.0.1:8775'
 #start-up the server on background
-server = os.popen(r'server.py')
+#server = os.popen(r'server.py')
 
 #open urlList.txt and read urls
 f = open("urllist.txt",'r')
@@ -65,7 +65,7 @@ class autoinjection():
 	   get task status:not running,running or terminated
 	'''
 	def GetStatus(self,staUrl):
-		r = requests.get(staUrl)
+		r = requests.get(staUrl,timeout=5)
 		info = r.json()
 		if info["success"]:
 			status = info["status"]
@@ -110,7 +110,7 @@ class autoinjection():
 					print "[!]this task has been started,please be patience."
 				else:
 					scanUrl = baseUrl + '/scan/%s/start' % taskId
-					if self.BeginScan(scanUrl,urlList[0]):
+					if self.BeginScan(scanUrl,urlList[0].rstrip('\n')):
 						urlList.pop(0)
 
 				beginTaskName += 1
@@ -195,7 +195,6 @@ class autoinjection():
 	def Flush(self):
 		tasknumber = 1
 		for taskId in self.taskidList:
-			print "lalalalalalalal"
 			staUrl = baseUrl + '/scan/%s/status' % taskId
 			taskStatus = self.GetStatus(staUrl)
 			self.taskInfo[tasknumber] = [taskId,taskStatus]
@@ -209,7 +208,7 @@ def main():
 		try:
 			parameter = raw_input("[+]Input command:")
 		except:
-			server.close()
+			#server.close()
 			sys.exit(0)
 		if parameter == 'new':
 			autoSqli.BuildTask()
@@ -217,14 +216,12 @@ def main():
 
 		elif parameter == 'scan' and autoSqli.taskInfo:
 			autoSqli.ShowTask()
-			while True:
-				try:
-					taskNameString = raw_input("[+]Input taskname:")
-					taskNameList = taskNameString.split(",")
-					autoSqli.multiStart(taskNameList)
-				except:
-					print "[!]please Input the vaild taskname!"
-				break
+			try:
+				taskNameString = raw_input("[+]Input taskname:")
+				taskNameList = taskNameString.split(",")
+				autoSqli.multiStart(taskNameList)
+			except:
+				print "[!]please Input the vaild taskname!"
 			autoSqli.Flush()
 
 		elif parameter == 'status' and autoSqli.taskInfo:
@@ -232,48 +229,41 @@ def main():
 
 		elif parameter == 'delete' and autoSqli.taskInfo:
 			autoSqli.ShowTask()
-			while True:
-				try:
-					taskName = raw_input("[+]Input taskname:")
-					taskNameList = taskNameString.split(",")
-					autoSqli.multiDelete(taskNameList)
-				except:
-					print "[!]please Input the vaild taskname!"
-				break
+			try:
+				taskName = raw_input("[+]Input taskname:")
+				taskNameList = taskNameString.split(",")
+				autoSqli.multiDelete(taskNameList)
+			except:
+				print "[!]please Input the vaild taskname!"
 			autoSqli.Flush()
 
 		elif parameter == 'data' and autoSqli.taskInfo:
 			autoSqli.ShowTask()
-			while True:
-				try:
-					taskName = raw_input("[+]Input taskname:")
-					taskId = autoSqli.taskInfo[int(taskName)][0]
-					taskStatus = autoSqli.taskInfo[int(taskName)][1]
-					if taskStatus != "terminated":
-						print "[!]please wait the scan compelete or start-up this task first!"
-					else:
-						dataUrl = baseUrl + '/scan/%s/data' % taskId
-						autoSqli.GetData(dataUrl)
-				except:
-					print "[!]please Input the vaild taskname!"
-				break
+			try:
+				taskName = raw_input("[+]Input taskname:")
+				taskId = autoSqli.taskInfo[int(taskName)][0]
+				taskStatus = autoSqli.taskInfo[int(taskName)][1]
+				if taskStatus != "terminated":
+					print "[!]please wait the scan compelete or start-up this task first!"
+				else:
+					dataUrl = baseUrl + '/scan/%s/data' % taskId
+					autoSqli.GetData(dataUrl)
+			except:
+				print "[!]please Input the vaild taskname!"
 
 		elif parameter == 'stop' and autoSqli.taskInfo:
 			autoSqli.ShowTask()
-			while True:
-				try:
-					taskName = raw_input("[+]Input taskname:")
-					taskId = autoSqli.taskInfo[taskName][0]
-					taskStatus = autoSqli.taskInfo[taskName][1]
-					if taskStatus == "not running" or taskStatus == 'terminated':
-						print "[!]this task has been stoped!"
-					else:
-						stopUrl = baseUrl + '/scan/%s/stop' % taskId
-						autoSqli.StopScan(stopUrl)
-
-				except:
-					print "[+]please Input the vaild taskname!"
-				break
+			try:
+				taskName = raw_input("[+]Input taskname:")
+				taskId = autoSqli.taskInfo[taskName][0]
+				taskStatus = autoSqli.taskInfo[taskName][1]
+				if taskStatus == "not running" or taskStatus == 'terminated':
+					print "[!]this task has been stoped!"
+				else:
+					stopUrl = baseUrl + '/scan/%s/stop' % taskId
+					autoSqli.StopScan(stopUrl)
+			except:
+				print "[+]please Input the vaild taskname!"
 			autoSqli.Flush()
 		elif parameter == 'exit':
 			print "bye!"

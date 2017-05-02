@@ -1,28 +1,32 @@
 import scrapy
-from tutorial.items import TutorialItem
+from govcrawl.items import GovcrawlItem
 import re
+import urlparse
 
 class GovSpider(scrapy.Spider):
-	name = "chengwill"
+	name = "govspider"
+	download_delay = 1
+	allowed_domains = ['192.168.0.102']
+	def __init__(self,target = None):
+		self.com = urlparse.urlparse(target)
+		self.start_urls = ['%s' % (target)]
+		#self.allowed_domains = ["%s" % (self.com.netloc)]
+		super(GovSpider,self).__init__()
 
-	allowed_domains = ["chengwill.cn"]
-	start_urls = ["http://www.chengwill.cn/blog"]
 	def parse(self,response):
 		sel = scrapy.Selector(response)
 		article_info = sel.xpath("//a")
 
 		for info in article_info:
-			item = TutorialItem()
+			item = GovcrawlItem()
 			link = info.xpath('@href').extract()
 			position = link[0].find("/")
-			if position < 0:
+			if position < 0 or "?" not in link[0]:
 				continue
 			elif "http" not in link[0]:
 				url = response.url + link[0][position:]
-			elif re.match(r'http://www\.chengwill\.cn/.*',link[0]):
-				url = link[0]
 			else:
-				continue
+				url = link[0]
 			yield scrapy.Request(url,callback=self.parse)
 			item['link'] = url
 			title = info.xpath('text()').extract()
@@ -31,5 +35,4 @@ class GovSpider(scrapy.Spider):
 			else:
 				item['title'] = None
 			print item['title'],item['link']
-			#raw_input("stop!")
 			yield item

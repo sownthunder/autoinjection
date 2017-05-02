@@ -13,7 +13,7 @@ BOT_NAME = 'govcrawl'
 
 SPIDER_MODULES = ['govcrawl.spiders']
 NEWSPIDER_MODULE = 'govcrawl.spiders'
-DUPEFILTER_CLASS = 'govcrawl.duplicate_filter.CustomFilter'
+#DUPEFILTER_CLASS = 'govcrawl.duplicate_filter.CustomFilter'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'govcrawl (+http://www.yourdomain.com)'
