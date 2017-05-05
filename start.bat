@@ -1,5 +1,7 @@
 @echo off
 start python server.py
-start python main.py
-cmd /k "cd spider\govcrawl"
-exit
+cd /d spider\govcrawl
+scrapy crawl govspider
+for /l %%i in (1,1,1) do (python ..\..\main.py < ..\..\txt\parameter.txt)
+python ..\..\query.py >> ..\..\result.txt
+pause

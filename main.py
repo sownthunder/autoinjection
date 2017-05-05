@@ -12,18 +12,13 @@ delUrl = ''
 staUrl = ''
 dataUrl = ''
 baseUrl = 'http://127.0.0.1:8775'
-#start-up the server on background
-#server = os.popen(r'server.py')
-
-#open urlList.txt and read urls
-f = open("urllist.txt",'r')
-urlList = f.readlines()
 
 class autoinjection():
 	def __init__(self):
 		#self.taskInfo is a dictionary looks like {taskname:[taskId,taskStatus]}
 		self.taskInfo = dict()
 		self.taskidList = []
+		self.urlList = []
 
 	'''
 	   show how to use this injection tool
@@ -54,13 +49,21 @@ class autoinjection():
 	'''
 	def BuildTask(self):
 		newUrl = baseUrl + "/task/new"
-		for n in range(0,len(urlList)):
+
+		#open urlList.txt and read urls
+		f = open("..\\..\\txt\\urllist.txt",'r')
+		d = open("..\\..\\txt\\taskidlist.txt",'w')
+		self.urlList = f.readlines()
+
+		for n in range(0,len(self.urlList)):
 			r = requests.get(newUrl)
 			info = r.json()
 			taskid = info["taskid"]
 			self.taskidList.append(taskid)
 			r.close()
-
+			d.write(taskid+'\n')
+		f.close()
+		d.close()
 	'''
 	   get task status:not running,running or terminated
 	'''
@@ -107,11 +110,13 @@ class autoinjection():
 				taskId = self.taskInfo[beginTaskName][0]
 				taskStatus = self.taskInfo[beginTaskName][1]
 				if taskStatus == "running":
-					print "[!]this task has been started,please be patience."
+					print "[!]task %s has been started,please be patience." % (beginTaskName)
+				elif taskStatus == 'terminated':
+					print '[!]task %s has been terminated,use "data" to show result.' % (beginTaskName)
 				else:
 					scanUrl = baseUrl + '/scan/%s/start' % taskId
-					if self.BeginScan(scanUrl,urlList[0].rstrip('\n')):
-						urlList.pop(0)
+					if self.BeginScan(scanUrl,self.urlList[0].rstrip('\n')):
+						self.urlList.pop(0)
 
 				beginTaskName += 1
 
@@ -124,7 +129,8 @@ class autoinjection():
 				taskId = self.taskInfo[beginTaskName][0]
 				delUrl = baseUrl + '/task/%s/delete' % taskId
 				if self.DelTask(delUrl):
-					self.taskInfo.pop(beginTaskName)
+					#self.taskInfo.pop(beginTaskName)
+					self.taskidList.remove(taskId)
 				beginTaskName += 1
 
 	def DelTask(self,delUrl):
@@ -177,7 +183,6 @@ class autoinjection():
 					print "---------------INJECTION    TYPE    %s-----------------------" % Injection_type
 					print "[+]title: %s" % info["data"][1]["value"][0]["data"][Injection_type]["title"]
 					print "[+]payload: %s" % info["data"][1]["value"][0]["data"][Injection_type]["payload"]
-					print ""
 					print "[+]error: %s" % info["error"]
 					print ""
 			elif not info["data"]:
@@ -218,6 +223,8 @@ def main():
 			autoSqli.ShowTask()
 			try:
 				taskNameString = raw_input("[+]Input taskname:")
+				if taskNameString == 'all':
+					taskNameString = '1-%d' % (len(autoSqli.taskidList))
 				taskNameList = taskNameString.split(",")
 				autoSqli.multiStart(taskNameList)
 			except:
@@ -225,6 +232,7 @@ def main():
 			autoSqli.Flush()
 
 		elif parameter == 'status' and autoSqli.taskInfo:
+			autoSqli.Flush()
 			autoSqli.ShowTask()
 
 		elif parameter == 'delete' and autoSqli.taskInfo:
@@ -238,6 +246,7 @@ def main():
 			autoSqli.Flush()
 
 		elif parameter == 'data' and autoSqli.taskInfo:
+			autoSqli.Flush()
 			autoSqli.ShowTask()
 			try:
 				taskName = raw_input("[+]Input taskname:")
@@ -252,6 +261,7 @@ def main():
 				print "[!]please Input the vaild taskname!"
 
 		elif parameter == 'stop' and autoSqli.taskInfo:
+			autoSqli.Flush()
 			autoSqli.ShowTask()
 			try:
 				taskName = raw_input("[+]Input taskname:")
@@ -274,5 +284,6 @@ def main():
 
 		else:
 			print "[!]please create task first!"
+
 if __name__=="__main__":
-    main()
+	main()

@@ -25,6 +25,7 @@ USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45
 LOG_LEVEL = 'ERROR'
 RETRY_ENABLED = False
 DOWNLOAD_TIMEOUT = 10
+DEPTH_LIMIT = 1
 ITEM_PIPELINES = {
     'govcrawl.pipelines.GovcrawlPipeline': 300,
 }

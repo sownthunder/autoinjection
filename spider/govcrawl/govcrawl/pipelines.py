@@ -9,7 +9,7 @@ from scrapy.exceptions import DropItem
 
 class GovcrawlPipeline(object):
 	def __init__(self):
-		self.file = open("..\\..\\..\\urllist.txt","ab")
+		self.file = open("..\\..\\txt\\urllist.txt","ab")
 		self.seen = set()
 
 	def __getid(self,url):
@@ -55,4 +55,5 @@ class GovcrawlPipeline(object):
 
 		line = item["link"]+'\n'
 		self.file.write(line)
+		self.file.close()
 		return item
