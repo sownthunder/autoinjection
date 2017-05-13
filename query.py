@@ -18,7 +18,7 @@ while True:
 		dataUrl = "http://127.0.0.1:8775/scan/%s/data" % taskid.rstrip('\n')
 		status = autoSqli.GetStatus(staUrl)
 
-		if status == "terminated":
+		if taskid not in valueSet and status == "terminated":
 			valueSet.append(taskid)
 			autoSqli.GetData(dataUrl)
 
