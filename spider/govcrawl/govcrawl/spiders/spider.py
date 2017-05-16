@@ -35,5 +35,5 @@ class GovSpider(scrapy.Spider):
 				item['title'] = title[0]
 			else:
 				item['title'] = None
-			print item['link']
+			#print item['link']
 			yield item
