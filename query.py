@@ -9,7 +9,7 @@ autoSqli = autoinjection()
 
 valueSet = []
 
-filestream = open("..\\..\\txt\\taskidlist.txt",'r')
+filestream = open("txt\\taskidlist.txt",'r')
 taskidlist = filestream.readlines()
 
 while True:

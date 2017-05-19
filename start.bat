@@ -2,6 +2,7 @@
 start python server.py
 cd /d spider\govcrawl
 scrapy crawl govspider
-for /l %%i in (1,1,1) do (python ..\..\main.py < ..\..\txt\parameter.txt)
-python ..\..\query.py >> ..\..\result.txt
+cd ..\..\
+for /l %%i in (1,1,1) do (python main.py < txt\parameter.txt)
+python uery.py >> result.txt
 pause

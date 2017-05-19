@@ -7,7 +7,7 @@ class GovSpider(scrapy.Spider):
 	name = "govspider"
 	download_delay = 1
 	#allowed_domains = ['192.168.0.102']
-	f = open("..\\..\\website.txt","r")
+	f = open("website.txt","r")
 	websites = f.readlines()
 	start_urls = ['%s' % (target.rstrip()) for target in websites]
 	allowed_domains = ["%s" % (urlparse.urlparse(target.rstrip()).netloc) for target in websites]

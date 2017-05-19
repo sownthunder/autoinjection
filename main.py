@@ -51,8 +51,8 @@ class autoinjection():
 		newUrl = baseUrl + "/task/new"
 
 		#open urlList.txt and read urls
-		f = open("..\\..\\txt\\urllist.txt",'r')
-		d = open("..\\..\\txt\\taskidlist.txt",'w')
+		f = open("txt\\urllist.txt",'r')
+		d = open("txt\\taskidlist.txt",'w')
 		self.urlList = f.readlines()
 
 		for n in range(0,len(self.urlList)):
@@ -111,8 +111,8 @@ class autoinjection():
 				taskStatus = self.taskInfo[beginTaskName][1]
 				if taskStatus == "running":
 					print "[!]task %s has been started,please be patience." % (beginTaskName)
-				elif taskStatus == 'terminated':
-					print '[!]task %s has been terminated,use "data" to show result.' % (beginTaskName)
+				'''elif taskStatus == 'terminated':
+					print '[!]task %s has been terminated,use "data" to show result.' % (beginTaskName)'''
 				else:
 					scanUrl = baseUrl + '/scan/%s/start' % taskId
 					if self.BeginScan(scanUrl,self.urlList[0].rstrip('\n')):
@@ -187,7 +187,7 @@ class autoinjection():
 					print ""
 			elif not info["data"]:
 				print ""
-				print "[!]this site are unvunlerable!"
+				print "[!]this site are unvunlerable or you can restart it."
 				print ""
 			else:
 				print ""
@@ -265,8 +265,8 @@ def main():
 			autoSqli.ShowTask()
 			try:
 				taskName = raw_input("[+]Input taskname:")
-				taskId = autoSqli.taskInfo[taskName][0]
-				taskStatus = autoSqli.taskInfo[taskName][1]
+				taskId = autoSqli.taskInfo[int(taskName)][0]
+				taskStatus = autoSqli.taskInfo[int(taskName)][1]
 				if taskStatus == "not running" or taskStatus == 'terminated':
 					print "[!]this task has been stoped!"
 				else:
