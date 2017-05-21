@@ -10,8 +10,8 @@ import urlparse
 
 class GovcrawlPipeline(object):
 	def __init__(self):
-		self.file = open("txt\\urllist.txt","w")
-		f = open("txt\\value.txt",'r')
+		self.file = open("..\\..\\txt\\urllist.txt","w")
+		f = open("..\\..\\txt\\value.txt",'r')
 		self.valuedict = f.readlines()
 		self.seen = set()
 

@@ -1,29 +1,19 @@
 import time
-import datetime
-import sqlite3
-from main import autoinjection
-import tempfile
-import os
+import requests
 
-autoSqli = autoinjection()
-
-valueSet = []
-
-filestream = open("txt\\taskidlist.txt",'r')
-taskidlist = filestream.readlines()
+valueSet = set()
 
 while True:
-	for taskid in taskidlist:
-		staUrl = "http://127.0.0.1:8775/scan/%s/status" % taskid.rstrip('\n')
-		dataUrl = "http://127.0.0.1:8775/scan/%s/data" % taskid.rstrip('\n')
-		status = autoSqli.GetStatus(staUrl)
+	staUrl = "http://127.0.0.1:8775/admin/a/list"
+	r = requests.get(staUrl)
+	info = r.json()
+	for taskid,taskstatus in info['tasks']:
+		if taskstatus == 'terminated' and taskid not in valueSet:
+			valueSet.add(taskid)
+			response = requests.get("http://127.0.0.1:8775/scan/%s/data" % taskid)
+			datainfo = response.json()
+			print
 
-		if taskid not in valueSet and status == "terminated":
-			valueSet.append(taskid)
-			autoSqli.GetData(dataUrl)
-
-	if len(valueSet) == len(taskidlist):
+	if len(valueSet) == info['tasks_num']:
 		break
 	time.sleep(3)
-
-filestream.close()
