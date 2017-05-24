@@ -5,8 +5,20 @@ import getopt
 import json
 import sys
 import os
+from sqlmap import modulePath
+from lib.parse.cmdline import cmdLineParser
+from lib.core.common import getUnicode
+from lib.core.data import conf
+from lib.core.data import newoptiondict
 
 baseUrl = 'http://127.0.0.1:8775'
+absDirectory = os.path.join(modulePath(),'txt\\urllist.txt')
+
+def UpdateDict(optiondict):
+	for key,value in optiondict.items():
+		if value != None:
+			newoptiondict[key] = value
+	return newoptiondict
 
 class autoinjection():
 	def __init__(self):
@@ -18,12 +30,15 @@ class autoinjection():
 	def usage(self):
 		print ""
 		print "Options:"
+		print "  help       get this usage information"
 		print "  new        /task/new              build a new task"
 		print "  scan       /scan/<taskid>         begin to scan target url"
 		print "  delete     /task/<taskid>/delete  delete a scan task"
 		print "  status     /scan/<taskid>/status  check the task status"
 		print "  data       /scan/<taskid>/data    check the task result"
 		print "  stop       /scan/<taskid>/stop    stop the task"
+		print "  set        /option/<taskid>/set   set options"
+		print "  list       /option/<taskid>/list  list all options of the task"
 
 	def ShowTask(self):
 		print " ------------ ------------------ ------------"
@@ -38,10 +53,35 @@ class autoinjection():
 		r = requests.get(flushUrl)
 		#info = r.json()
 
+	def SetOptions(self,setOptUrl,optiondict):
+		r = requests.post(setOptUrl,data=json.dumps(optiondict),headers={'Content-Type':'application/json'})
+		info = r.json()
+		if info['success']:
+			print ""
+			print "[!]options have been set!"
+			print ""
+		else:
+			print ""
+			print "[!]set options failed!"
+			print ""
+
+	def ListOptions(self,listOptUrl):
+		r = requests.get(listOptUrl)
+		info = r.json()
+		if info['success']:
+			print ""
+			for key in info['options']:
+				print "%s => %s" % (key,info['options'][key])
+			print ""
+		else:
+			print ""
+			print "[!]get options list failed!"
+			print ""
+
 	def BuildTask(self):
 		newUrl = baseUrl + "/task/new"
 		#open urlList.txt and read urls
-		f = open("txt\\urllist.txt",'r')
+		f = open(absDirectory,'r')
 		self.urlList = f.readlines()
 
 		for n in range(0,len(self.urlList)):
@@ -61,7 +101,7 @@ class autoinjection():
 		else:
 			if info["success"]:
 				print ""
-				print "[!]task begin to run!"
+				print "[!]task begin to run! targeturl: %s" % targetUrl
 				print "[+]engineid: %s" % info["engineid"]
 				print "[+]success: %s" % info["success"]
 				print ""
@@ -72,8 +112,8 @@ class autoinjection():
 				print ""
 				return 0
 
-	def multiStart(self,*taskNameList):
-		for taskName in taskNameList[0]:
+	def multiStart(self,taskNameList):
+		for taskName in taskNameList:
 			taskName.strip()
 			beginTaskName = int(taskName.split('-')[0])
 			endTaskName = int(taskName.split('-')[-1])
@@ -89,8 +129,8 @@ class autoinjection():
 
 				beginTaskName += 1
 
-	def multiDelete(self,*taskNameList):
-		for taskName in taskNameList[0]:
+	def multiDelete(self,taskNameList):
+		for taskName in taskNameList:
 			taskName.strip()
 			beginTaskName = int(taskName.split('-')[0])
 			endTaskName = int(taskName.split('-')[-1])
@@ -182,9 +222,11 @@ def main():
 		try:
 			parameter = raw_input("[+]Input command:")
 		except:
-			#server.close()
 			sys.exit(0)
-		if parameter == 'new':
+		if parameter == 'help':
+			autoSqli.usage()
+
+		elif parameter == 'new':
 			autoSqli.AdminFlush()
 			autoSqli.BuildTask()
 			autoSqli.GetTaskList()
@@ -202,7 +244,7 @@ def main():
 			autoSqli.GetTaskList()
 
 		elif parameter == 'status' and autoSqli.taskInfo:
-			#autoSqli.GetTaskList()
+			autoSqli.GetTaskList()
 			autoSqli.ShowTask()
 
 		elif parameter == 'delete' and autoSqli.taskInfo:
@@ -230,6 +272,32 @@ def main():
 			except:
 				print "[!]please Input the vaild taskname!"
 
+		elif parameter == 'set' and autoSqli.taskInfo:
+			autoSqli.ShowTask()
+			try:
+				taskName = raw_input("[+]Input taskname:")
+				taskOption = raw_input("[+]Input option(same as sqlmap command line):")
+				OptionList = taskOption.split(" ")
+				optiondict = UpdateDict(cmdLineParser(OptionList).__dict__)
+				conf.update(optiondict)
+				taskId = autoSqli.taskInfo[int(taskName)][0]
+				setOptUrl = baseUrl + '/option/%s/set' % taskId
+				autoSqli.SetOptions(setOptUrl,conf)
+			except:
+				print "[+]please Input the vaild taskname!"
+			autoSqli.GetTaskList()
+
+		elif parameter == 'list' and autoSqli.taskInfo:
+			autoSqli.ShowTask()
+			try:
+				taskName = raw_input("[+]Input taskname:")
+				taskId = autoSqli.taskInfo[int(taskName)][0]
+				listOptUrl = baseUrl + '/option/%s/list' % taskId
+				autoSqli.ListOptions(listOptUrl)
+			except:
+				print "[+]please Input the vaild taskname!"
+			autoSqli.GetTaskList()
+
 		elif parameter == 'stop' and autoSqli.taskInfo:
 			#autoSqli.GetTaskList()
 			autoSqli.ShowTask()
@@ -245,6 +313,7 @@ def main():
 			except:
 				print "[+]please Input the vaild taskname!"
 			autoSqli.GetTaskList()
+
 		elif parameter == 'exit':
 			print "bye!"
 			sys.exit(0)

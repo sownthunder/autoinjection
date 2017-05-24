@@ -21,6 +21,9 @@ mergedOptions = AttribDict()
 # line options and settings
 conf = AttribDict()
 
+#object to store new function and classes command
+newoptiondict = AttribDict()
+
 # object to share within function and classes results
 kb = AttribDict()
 

@@ -20,6 +20,8 @@
 ?NEWBDFF
 ?NEWJDZZ
 ?appcode
+?goodsType
+&goodsType
 ?forward_page
 ?formMap.TERM_CRS_YEAR
 ?formMap.TERM_CRS_TYPE
